@@ -1,6 +1,14 @@
 ﻿
 <h1>MovieList</h1>
 
+@if (MovieAdded)
+{
+    <div class="alert alert-success">
+        @AddToCartMessage
+    </div>
+}
+
+
 @if (Movies == null)
 {
     <p>LOADING...</p>
@@ -14,7 +22,7 @@ else
     @foreach (var movie in Movies)
     {
         //pass movie object to different component and print whatever's in that component
-        <IndividualMovie Movie="movie" DeleteMovie="() => DeleteMovie(movie)"/>
+        <IndividualMovie Movie="movie" DeleteMovie="() => DeleteMovie(movie)" AddMovieToCart="() => AddMovieToCart(movie)" />
     }
 }
 
@@ -24,6 +32,16 @@ else
     //parameter tag requires a property
     [Parameter]
     public List<Movie> Movies { get; set; }
+
+    public string AddToCartMessage { get; set; }
+
+    public bool MovieAdded { get; set; } = false;
+
+    private void AddMovieToCart(Movie movie)
+    {
+        MovieAdded = true;
+        AddToCartMessage = $"{movie.Title} has been succesfully added to your cart.";
+    }
 
     private void DeleteMovie(Movie movie)
     {
