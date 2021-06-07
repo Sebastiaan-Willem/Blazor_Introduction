@@ -1,0 +1,33 @@
+﻿
+<h1>MovieList</h1>
+
+@if (Movies == null)
+{
+    <p>LOADING...</p>
+}
+else if (!Movies.Any())
+{
+    <p>No movies to show.</p>
+}
+else
+{
+    @foreach (var movie in Movies)
+    {
+        //pass movie object to different component and print whatever's in that component
+        <IndividualMovie Movie="movie" DeleteMovie="() => DeleteMovie(movie)"/>
+    }
+}
+
+
+@code {
+
+    //parameter tag requires a property
+    [Parameter]
+    public List<Movie> Movies { get; set; }
+
+    private void DeleteMovie(Movie movie)
+    {
+        Movies.Remove(movie);
+    }
+
+}

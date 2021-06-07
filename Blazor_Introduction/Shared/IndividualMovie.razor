@@ -1,0 +1,25 @@
+﻿<div class="movie">
+    <h5 class="title">@Movie.Title</h5>
+    <p>Genre:  @Movie.Genre</p>
+    <p>Rating: @Movie.Rating</p>
+    <p>Year of Release: @Movie.YearOfRelease</p>
+    <p>
+        <button class="btn btn-purple" @onclick="() => DeleteMovie.InvokeAsync(Movie)">X</button>
+
+    </p>
+</div>
+
+
+
+@code {
+    [Parameter]
+    public Movie Movie { get; set; }
+
+    [Parameter]
+    public EventCallback<Movie> DeleteMovie { get; set; }
+    //eventcallback to pass movie object back to calling class
+}
+
+
+
+@*disabled input field -> edit button -> enabled*@
