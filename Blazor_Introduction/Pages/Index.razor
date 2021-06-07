@@ -1,5 +1,6 @@
 ﻿@page "/"
 @page "/home"
+@inject IMovieService service
 
 @*load component in razor page*@
 <MovieList Movies="@movies" />
@@ -10,13 +11,7 @@
 
     protected override void OnInitialized()
     {
-        //OnInitialized() -> similar to OnAwake function in unity
-        //seed list with dummy data
-        movies = new List<Movie>
-            {
-                new Movie{Title = "Titanic", Genre="Drama", Rating=8.4, YearOfRelease=1999},
-                new Movie{Title = "Joker", Genre="Drama", Rating=8.1, YearOfRelease=2019},
-                new Movie{Title = "Ghost Ship", Genre="Horror", Rating=5.7, YearOfRelease=2004},
-            };
+        //DEPENDENCY INJECTION IN BLAZOR -> top of the page
+        movies = service.GetMovies();
     }
 }
