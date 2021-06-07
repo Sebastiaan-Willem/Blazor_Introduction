@@ -1,11 +1,17 @@
 ﻿<div class="movie">
     <h5 class="title">@Movie.Title</h5>
     <p>
-        <input @bind="@Movie.Title" disabled="@IsDisabled" @onblur="DisableFields" />
+        <input class="form-control" @bind="@Movie.Title" disabled="@IsDisabled" @onblur="DisableFields" />
     </p>
-    <p>Genre:  @Movie.Genre</p>
-    <p>Rating: @Movie.Rating</p>
-    <p>Year of Release: @Movie.YearOfRelease</p>
+    <p>
+        <input class="form-control" @bind="@Movie.Genre" disabled="@IsDisabled" @onblur="DisableFields" />
+    </p>
+    <p>
+        <input class="form-control" @bind="@Movie.Rating" disabled="@IsDisabled" @onblur="DisableFields" />
+    </p>
+    <p>
+        <input class="form-control" @bind="@Movie.YearOfRelease" disabled="@IsDisabled" @onblur="DisableFields" />
+    </p>
     <p>
         <button class="btn btn-primary" @onclick="EditField">Edit</button>
         <button class="btn btn-primary" @onclick="() => AddMovieToCart.InvokeAsync(Movie)">Add to Cart</button>
