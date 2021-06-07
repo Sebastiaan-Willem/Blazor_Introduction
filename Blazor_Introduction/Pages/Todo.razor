@@ -2,8 +2,64 @@
 @*turn this component into a page with a route by adding above tag*@
 
 
-<h1>Todo</h1>
+<h1>Todo (@items.Count(x => !x.IsDone))</h1>
+
+<input type="text" placeholder="Add Todo" @bind="newTodo" />
+<button class="btn btn-primary" @onclick="AddItem">Add Todo</button>
+
+@if (!items.Any())
+{
+    <p>No items in collection</p>
+}
+else
+{
+    <ul>
+        @foreach (var item in items)
+        {
+            <li>
+                <input type="checkbox" @bind="@item.IsDone"/>
+                <input type="text" @bind="@item.Title" /> 
+                <p>
+                    @item.Title
+                    @*binding test*@
+                </p>
+            </li>
+        }
+    </ul>
+}
+
+
+
+
 
 @code {
+
+    //bind backend field to frontend element
+    private string newTodo;
+
+    private List<TodoItem> items = new();
+    //shorthand to initialize (since it's already specified on the left side)
+
+    public class TodoItem
+    {
+        public string Title { get; set; }
+        public bool IsDone { get; set; }
+    }
+
+    //can be private because we're in the same file
+    private void AddItem()
+    {
+        if (!string.IsNullOrEmpty(newTodo))
+        {
+            items.Add(new TodoItem
+            {
+                IsDone = false,
+                Title = newTodo
+            });
+        }
+
+        //reset variable
+        newTodo = string.Empty;
+    }
 
 }
