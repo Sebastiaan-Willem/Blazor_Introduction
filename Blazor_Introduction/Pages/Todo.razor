@@ -19,6 +19,7 @@ else
             <li>
                 <input type="checkbox" @bind="@item.IsDone"/>
                 <input type="text" @bind="@item.Title" /> 
+                <button class="btn btn-danger" @onclick="() => RemoveItem(item)">X</button>
                 <p>
                     @item.Title
                     @*binding test*@
@@ -27,8 +28,6 @@ else
         }
     </ul>
 }
-
-
 
 
 
@@ -60,6 +59,11 @@ else
 
         //reset variable
         newTodo = string.Empty;
+    }
+
+    private void RemoveItem(TodoItem item)
+    {
+        items.Remove(item);
     }
 
 }
