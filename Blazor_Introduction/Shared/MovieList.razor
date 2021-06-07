@@ -9,11 +9,7 @@
 }
 
 
-@if (Movies == null)
-{
-    <p>LOADING...</p>
-}
-else if (!Movies.Any())
+@if (!Movies.Any())
 {
     <p>No movies to show.</p>
 }

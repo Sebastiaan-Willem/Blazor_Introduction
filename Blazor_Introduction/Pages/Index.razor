@@ -2,16 +2,24 @@
 @page "/home"
 @inject IMovieService service
 
-@*load component in razor page*@
-<MovieList Movies="@movies" />
+@if (movies == null)
+{
+    <p>LOADING...</p>
+}
+else
+{
+    @*load component in razor page*@
+    <MovieList Movies="@movies" />
+}
+
 
 @code{
 
     List<Movie> movies;
 
-    protected override void OnInitialized()
+    protected override async void OnInitialized()
     {
         //DEPENDENCY INJECTION IN BLAZOR -> top of the page
-        movies = service.GetMovies();
+        movies = await service.GetMoviesAsync();
     }
 }

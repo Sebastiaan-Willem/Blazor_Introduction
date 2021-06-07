@@ -10,8 +10,11 @@ namespace Blazor_Introduction.Services
     {
         //OnInitialized() -> similar to OnAwake function in unity
         //seed list with dummy data
-        public List<Movie> GetMovies()
+        public async Task<List<Movie>> GetMoviesAsync()
         {
+            //simulate loading data
+           //await Task.Delay(3000);
+
             return new List<Movie>
             {
                 new Movie{Title = "Titanic", Genre="Drama", Rating=8.4, YearOfRelease=1999},
