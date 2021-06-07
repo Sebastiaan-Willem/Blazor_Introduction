@@ -14,6 +14,15 @@ namespace Blazor_Introduction
     {
         public static async Task Main(string[] args)
         {
+            /*
+             
+             dotnet watch run --project <project name>
+
+            to put watcher on the project and "hot reload" changes to frontend without having to rebuild for every single change
+             
+             
+             */
+
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
