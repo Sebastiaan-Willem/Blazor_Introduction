@@ -1,16 +1,26 @@
-﻿<div class="movie">
+﻿@inject IGenreService service
+
+<div class="movie">
     <h5 class="title">@Movie.Title</h5>
     <p>
         <input class="form-control" @bind="@Movie.Title" disabled="@IsDisabled" @onblur="DisableFields" />
     </p>
-    <p>
-        <input class="form-control" @bind="@Movie.Genre" disabled="@IsDisabled" @onblur="DisableFields" />
-    </p>
+
     <p>
         <input class="form-control" @bind="@Movie.Rating" disabled="@IsDisabled" @onblur="DisableFields" />
     </p>
     <p>
-        <input class="form-control" @bind="@Movie.YearOfRelease" disabled="@IsDisabled" @onblur="DisableFields" />
+        <div>
+            <select class="form-control" @bind="Movie.GenreId" disabled="@IsDisabled" @onblur="DisableFields">
+                @foreach (var genre in genres)
+                {
+                    <option value="@genre.Id">@genre.Name</option>
+                }
+            </select>          
+        </div>
+    </p>
+    <p>
+        <input class="form-control" @bind="@Movie.ReleaseDate" disabled="@IsDisabled" @onblur="DisableFields" />
     </p>
     <p>
         <button class="btn btn-primary" @onclick="EditField">Edit</button>
@@ -33,7 +43,15 @@
     public EventCallback<Movie> AddMovieToCart { get; set; }
     //eventcallback to pass movie object back to calling class
 
+    private List<Genre> genres;
+
     public bool IsDisabled { get; set; } = true;
+
+
+    protected override void OnInitialized()
+    {
+        genres = service.GetGenres();
+    }
 
     private void EditField()
     {
