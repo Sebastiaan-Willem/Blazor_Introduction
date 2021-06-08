@@ -48,3 +48,24 @@ a, .btn-link {
         right: 0.75rem;
         top: 0.5rem;
     }
+
+
+
+    /*PERSONAL STUFF*/
+
+.movie {
+    margin-bottom: 3rem;
+    border: 1px solid mediumorchid;
+    padding: 10px;
+}
+
+.title {
+    font-weight: bold;
+    color: mediumorchid;
+}
+
+.btn-purple {
+    background-color: mediumorchid;
+    color: white;
+}
+

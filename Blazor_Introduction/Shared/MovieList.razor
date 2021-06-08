@@ -1,16 +1,44 @@
-﻿@inject IGenreService service 
+﻿@inject IGenreService service
 
 <h1>MovieList</h1>
-<hr class="mb-5"/>
+<hr class="mb-3" />
 
-@if (MovieAdded)
+@if (!ShowAddMovieForm)
+{
+    <div>
+        <button class="btn btn-purple mb-3" @onclick="ShowAddMovie">Add Movie</button>
+    </div>
+}
+
+@if (HasBeenAdded)
+{
+    <div class="alert alert-success">
+        @movie.Title has been added succesfully!
+    </div>
+}
+@if (HasBeenEdited)
+{
+    <div class="alert alert-success">
+        @movieToEdit.Title has been edited succesfully!
+    </div>
+}
+
+@if (IsMovieAddedToCart)
 {
     <div class="alert alert-success">
         @AddToCartMessage
     </div>
 }
-
-<AddMovie AddNewMovie="CreateMovie" Movie="movie" ></AddMovie>
+@if (ShowAddMovieForm)
+{
+    <h3>Add Movie</h3>
+    <MovieForm OnValidSubmit="CreateMovie" Movie="movie"></MovieForm>
+}
+@if (ShowEditMovieForm)
+{
+    <h3>Edit Movie</h3>
+    <MovieForm OnValidSubmit="EditMovie" Movie="movieToEdit"></MovieForm>
+}
 
 <br />
 
@@ -24,7 +52,8 @@ else
     @foreach (var movie in Movies)
     {
         //pass movie object to different component and print whatever's in that component
-        <IndividualMovie Movie="movie" DeleteMovie="() => DeleteMovie(movie)" AddMovieToCart="() => AddMovieToCart(movie)" />
+        <IndividualMovie Movie="movie" DeleteMovie="() => DeleteMovie(movie)" AddMovieToCart="() => AddMovieToCart(movie)" EditMovie="() => SetEditMovie(movie)" />
+
     }
 }
 
@@ -36,22 +65,31 @@ else
     public List<Movie> Movies { get; set; }
 
     private Movie movie;
+    private Movie movieToEdit;
 
     private List<Genre> genres;
 
     public string AddToCartMessage { get; set; }
 
-    public bool MovieAdded { get; set; } = false;
+    public bool ShowAddMovieForm { get; set; } = false;
+
+    public bool ShowEditMovieForm { get; set; } = false;
+
+    public bool IsMovieAddedToCart { get; set; } = false;
+
+    public bool HasBeenAdded { get; set; } = false;
+    public bool HasBeenEdited { get; set; } = false;
 
 
     protected override void OnInitialized()
     {
+        movie = new Movie();
         genres = service.GetGenres();
     }
 
     private void AddMovieToCart(Movie movie)
     {
-        MovieAdded = true;
+        IsMovieAddedToCart = true;
         AddToCartMessage = $"{movie.Title} has been succesfully added to your cart.";
     }
 
@@ -62,7 +100,34 @@ else
 
     private void CreateMovie()
     {
+
         Movies.Add(movie);
+        ShowAddMovieForm = false;
+        HasBeenAdded = true;
+    }
+
+    private void SetEditMovie(Movie movie)
+    {
+        HasBeenAdded = false;
+        HasBeenEdited = false;
+        movieToEdit = movie;
+        ShowEditMovieForm = true;
+    }
+
+    private void EditMovie()
+    {
+        var oldMovie = Movies.FirstOrDefault(x => x.Id == movieToEdit.Id);
+        oldMovie = movie;
+        HasBeenEdited = true;
+        ShowEditMovieForm = false;
+
+    }
+
+    private void ShowAddMovie()
+    {
+        HasBeenAdded = false;
+        HasBeenEdited = false;
+        ShowAddMovieForm = true;
     }
 
 }

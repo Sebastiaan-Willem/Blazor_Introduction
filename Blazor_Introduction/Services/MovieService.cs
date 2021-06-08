@@ -24,7 +24,7 @@ namespace Blazor_Introduction.Services
 
             return new List<Movie>
             {
-                new Movie{Title = "Titanic", IsInTheaters = true, GenreId= 0 ,Genre= genres[0] , Rating=8.4, ReleaseDate = new DateTime(1999,01,01) },
+                new Movie{Title = "Titanic", IsInTheaters = true, GenreId = 0 , Rating=8.4, ReleaseDate = new DateTime(1999,01,01) },
                 new Movie{Title = "Joker", IsInTheaters = true, Genre= genres[4] , Rating=8.1, ReleaseDate = new DateTime(2019,01,01)},
                 new Movie { Title = "Ghost Ship", IsInTheaters = true, Genre= genres[3] , Rating = 5.7, ReleaseDate = new DateTime(2004,01,01) },
             };

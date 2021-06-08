@@ -1,8 +1,8 @@
 ﻿@inject IGenreService service
 
-<h3>Add Movie</h3>
+
 @*Blazor form*@
-<EditForm Model="Movie" OnValidSubmit="() => AddNewMovie.InvokeAsync(Movie)">
+<EditForm Model="Movie" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator />
     <div class="form-group">
         <label>Title</label>
@@ -12,7 +12,7 @@
         </div>
         <label>Description</label>
         <div>
-            <InputText class="form-control" @bind-Value="Movie.Description"></InputText>
+            <InputTextArea class="form-control" @bind-Value="Movie.Description"></InputTextArea>
             <ValidationMessage For="() => Movie.Description" />
         </div>
         <label>Genre</label>
@@ -41,7 +41,7 @@
             <ValidationMessage For="() => Movie.IsInTheaters" />
         </div>
 
-        <button class="btn btn-primary" type="submit">Create Movie</button>
+        <button class="btn btn-primary" type="submit">Save</button>
     </div>
 </EditForm>
 
@@ -49,7 +49,7 @@
 
 
     [Parameter]
-    public EventCallback<Movie> AddNewMovie { get; set; }
+    public EventCallback OnValidSubmit { get; set; }
     //eventcallback to pass movie object back to calling class
     [Parameter]
     public Movie Movie { get; set; }
@@ -58,14 +58,7 @@
 
     protected override void OnInitialized()
     {
-        Movie = new Movie();
         genres = service.GetGenres();
     }
-
-    //public async Task CreateNewMovie()
-    //{
-    //    await AddNewMovie.InvokeAsync(Movie);
-    //}
-
 
 }
