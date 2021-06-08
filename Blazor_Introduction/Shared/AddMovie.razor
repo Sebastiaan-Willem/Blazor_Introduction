@@ -2,7 +2,7 @@
 
 <h3>Add Movie</h3>
 @*Blazor form*@
-<EditForm Model="Movie" OnValidSubmit="CreateNewMovie">
+<EditForm Model="Movie" OnValidSubmit="() => AddNewMovie.InvokeAsync(Movie)">
     <DataAnnotationsValidator />
     <div class="form-group">
         <label>Title</label>
@@ -62,10 +62,10 @@
         genres = service.GetGenres();
     }
 
-    public async Task CreateNewMovie()
-    {
-        await AddNewMovie.InvokeAsync(Movie);
-    }
+    //public async Task CreateNewMovie()
+    //{
+    //    await AddNewMovie.InvokeAsync(Movie);
+    //}
 
 
 }

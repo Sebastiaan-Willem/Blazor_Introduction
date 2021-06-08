@@ -22,6 +22,11 @@ namespace Blazor_Introduction.Services
             return genres;
         }
 
+        public Genre GetGenre(int id)
+        {
+           return genres.FirstOrDefault(x => x.Id == id);
+        }
+
         public void AddGenre(Genre genre)
         {
             genres.Add(genre);
