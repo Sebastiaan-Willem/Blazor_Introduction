@@ -25,8 +25,8 @@
     <p>
         <button class="btn btn-primary" @onclick="EditField">Edit</button>
         <button class="btn btn-primary" @onclick="() => AddMovieToCart.InvokeAsync(Movie)">Add to Cart</button>
-        <button class="btn btn-purple" @onclick="() => DeleteMovie.InvokeAsync(Movie)">X</button>
-        <a href="#top"></a><button class="btn btn-purple" @onclick="() => EditMovie.InvokeAsync(Movie)">Edit with form</button><a/>
+        <button class="btn btn-purple" @onclick="() => EditMovie.InvokeAsync(Movie)">Edit with form</button>
+        <button class="btn btn-outline-danger" @onclick="() => DeleteMovie.InvokeAsync(Movie)">X</button>
     </p>
 </div>
 
