@@ -32,12 +32,12 @@
 @if (ShowAddMovieForm)
 {
     <h3>Add Movie</h3>
-    <MovieForm OnValidSubmit="CreateMovie" Movie="movie"></MovieForm>
+    <MovieForm OnValidSubmit="CreateMovie" Movie="movie" Cancel="Cancel"></MovieForm>
 }
 @if (ShowEditMovieForm)
 {
     <h3>Edit Movie</h3>
-    <MovieForm OnValidSubmit="EditMovie" Movie="movieToEdit"></MovieForm>
+    <MovieForm OnValidSubmit="EditMovie" Movie="movieToEdit" Cancel="Cancel"></MovieForm>
 }
 
 <br />
@@ -125,9 +125,16 @@ else
 
     private void ShowAddMovie()
     {
+        movie = new Movie();
         HasBeenAdded = false;
         HasBeenEdited = false;
         ShowAddMovieForm = true;
+    }
+
+    private void Cancel()
+    {
+        ShowAddMovieForm = false;
+        ShowEditMovieForm = false;
     }
 
 }

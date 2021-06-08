@@ -42,17 +42,21 @@
         </div>
 
         <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-danger" @onclick="Cancel">Cancel</button>
     </div>
 </EditForm>
 
 @code {
 
 
-    [Parameter]
-    public EventCallback OnValidSubmit { get; set; }
     //eventcallback to pass movie object back to calling class
     [Parameter]
+    public EventCallback OnValidSubmit { get; set; }
+    [Parameter]
+    public EventCallback Cancel { get; set; }
+    [Parameter]
     public Movie Movie { get; set; }
+
 
     private List<Genre> genres;
 
