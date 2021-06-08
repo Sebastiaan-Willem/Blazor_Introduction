@@ -10,50 +10,7 @@
     </div>
 }
 
-<h3>Add Movie</h3>
-@*Blazor form*@
-<EditForm Model="movie" OnValidSubmit="CreateMovie">
-    <DataAnnotationsValidator />
-    <div class="form-group">
-        <label>Title</label>
-        <div>
-            <InputText class="form-control" @bind-Value="movie.Title"></InputText>
-            <ValidationMessage For="() => movie.Title" />
-        </div>
-        <label>Description</label>
-        <div>
-            <InputText class="form-control" @bind-Value="movie.Description"></InputText>
-            <ValidationMessage For="() => movie.Description" />
-        </div>
-        <label>Genre</label>
-        <div>
-            <InputSelect class="form-control" @bind-Value="movie.GenreId">
-                @foreach (var genre in genres)
-                {
-                    <option value="@genre.Id">@genre.Name</option>
-                }
-            </InputSelect>
-            
-        </div>
-        <label>Rating</label>
-        <div>
-            <InputNumber class="form-control" @bind-Value="movie.Rating"></InputNumber>
-            <ValidationMessage For="() => movie.Rating" />
-        </div>
-        <label>Release Date</label>
-        <div>
-            <InputDate class="form-control" @bind-Value="movie.ReleaseDate"></InputDate>
-            <ValidationMessage For="() => movie.ReleaseDate" />
-        </div>
-        <label>Is in Theatres?</label>
-        <div>
-            <InputCheckbox class="form-control" @bind-Value="movie.IsInTheaters"></InputCheckbox>
-            <ValidationMessage For="() => movie.IsInTheaters" />
-        </div>
-
-        <button class="btn btn-primary" type="submit">Create Movie</button>
-    </div>
-</EditForm>
+<AddMovie AddNewMovie="CreateMovie" Movie="movie" ></AddMovie>
 
 <br />
 
@@ -86,11 +43,10 @@ else
 
     public bool MovieAdded { get; set; } = false;
 
+
     protected override void OnInitialized()
     {
-        movie = new Movie();
         genres = service.GetGenres();
-
     }
 
     private void AddMovieToCart(Movie movie)
